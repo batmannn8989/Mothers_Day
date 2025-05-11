@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Mother's Day</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      background-color: #fefae0;
+      background-image: url('https://www.transparenttextures.com/patterns/old-mathematics.png');
+      background-size: cover;
+      color: #3e2723;
+      overflow-x: hidden;
+      transition: filter 0.3s ease;
+    }
+
+    body.blurred .heart-gallery,
+    body.blurred header,
+    body.blurred .message,
+    body.blurred footer {
+      filter: blur(5px);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 9;
+      display: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 30px;
+      color: #4e342e;
+      background: #fff3e0;
+      border-bottom: 2px dashed #d7ccc8;
+    }
+
+    header h1 {
+      font-size: 4.5rem;
+      margin: 0;
+      color: #6d4c41;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 2.4rem;
+      margin-top: 10px;
+    }
+
+    .message {
+      text-align: center;
+      max-width: 800px;
+      margin: 30px auto;
+      background: rgba(255, 248, 240, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .highlight1 { color: #c62828; font-weight: bold; }
+    .highlight2 { color: #1565c0; font-weight: bold; }
+    .highlight3 { color: #2e7d32; font-weight: bold; }
+
+    .heart-gallery {
+      position: relative;
+      width: 520px;
+      height: 500px;
+      margin: 50px auto;
+      z-index: 10;
+    }
+
+    .heart-gallery img {
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+
+    .heart-gallery img.enlarged {
+      transform: scale(3);
+      z-index: 20;
+    }
+
+    .popup-text {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 10px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-size: 1.8rem;
+      display: none;
+      z-index: 21;
+      pointer-events: none;
+    }
+
+    .center-image {
+      top: 180px;
+      left: 200px;
+      width: 140px;
+      height: 140px;
+      z-index: 2;
+      border: 4px solid #fff;
+    }
+
+    .center-text {
+      position: absolute;
+      top: 340px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3rem;
+      color: #c2185b;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #5d4037;
+      font-size: 2rem;
+      background-color: #fff8e1;
+    }
+
+    #playMusicBtn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: #f48fb1;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1.8rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-family: 'Dancing Script', cursive;
+    }
+
+    #heartCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <canvas id="heartCanvas"></canvas>
+  <button id="playMusicBtn" onclick="playMusic()">Play Music 🎵</button>
+  <audio id="bg-music" loop>
+    <source src="music.mp3.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <header>
+    <h1>Happy Mother's Day 💖</h1>
+    <p class="quote">"To the world you are a mother, but to your family you are the world."</p>
+  </header>
+
+  <section class="message">
+    <p>Thank you for every <span class="highlight1">hug</span>, every word of <span class="highlight2">encouragement</span>, and every act of <span class="highlight3">love</span> you've given me. You're not just my mom—you're my <span class="highlight2">best friend</span>, my <span class="highlight3">guide</span>, and my <span class="highlight1">role model</span>. 🌷</p>
+    <p>Today, we celebrate you and all the <span class="highlight1">sacrifices</span> you made to see us smile. Here's to you, the <span class="highlight2">heart</span> of our home! 💐</p>
+    <p>I still remember those <span class="highlight3">late nights</span> before exams, though you were tired and you made sure I was doing good, giving me company even when you were tired. You <span class="highlight2">believed in me</span> even when I doubted myself, and your <span class="highlight3">faith</span> gave me strength to carry on.</p>
+    <p>Through every <span class="highlight1">challenge</span>—big or small—you were my <span class="highlight3">unwavering support</span>. Your <span class="highlight2">love</span> has been my <span class="highlight1">anchor</span>, your <span class="highlight2">words</span> my shield, and your <span class="highlight3">presence</span> my peace. Thank you for being there, always. 🌟</p>
+  </section>
+
+  <div class="heart-gallery" id="gallery">
+    <img src="mom1.jpg" style="top: 60px; left: 190px;">
+    <img src="mom2.jpg" style="top: 100px; left: 100px;">
+    <img src="mom3.jpg" style="top: 170px; left: 60px;">
+    <img src="mom4.jpg" style="top: 270px; left: 90px;">
+    <img src="mom5.jpg" style="top: 330px; left: 180px;">
+    <img src="mom6.jpg" style="top: 330px; left: 280px;">
+    <img src="mom7.jpg" style="top: 270px; left: 360px;">
+    <img src="mom8.jpg" style="top: 170px; left: 390px;">
+    <img src="mom9.jpg" style="top: 100px; left: 320px;">
+    <img src="mom10.jpg" style="top: 60px; left: 250px;">
+    <img src="mom_center.jpg" class="center-image">
+    <div class="center-text">WE LOVE YOU MOM</div>
+  </div>
+
+  <footer>
+    Made with ❤️ for Mom
+  </footer>
+
+  <script>
+    function playMusic() {
+      const music = document.getElementById('bg-music');
+      const button = document.getElementById('playMusicBtn');
+      music.play().then(() => {
+        button.style.display = 'none';
+      }).catch(err => {
+        console.log('Music play failed:', err);
+      });
+    }
+
+    const messages = [
+      'Thank you for every sacrifice, Mom 💕',
+      'Your love is endless 💖',
+      'Forever grateful for you, Mom 🌸',
+      'You are my strength and my peace 🕊️',
+      'Thank you for believing in me ✨',
+      'Your hugs are magic! 💫',
+      'The light in my life 🌟',
+      'I love you more than words 💞',
+      'Home is where Mom is 🏡',
+      'My first friend, my best friend 👩‍👧'
+    ];
+
+    const imgs = document.querySelectorAll('.heart-gallery img:not(.center-image)');
+    const overlay = document.getElementById('overlay');
+
+    imgs.forEach((img, i) => {
+      const popup = document.createElement('div');
+      popup.className = 'popup-text';
+      popup.innerText = messages[i];
+      document.body.appendChild(popup);
+
+      img.addEventListener('click', () => {
+        const isEnlarged = img.classList.toggle('enlarged');
+        document.body.classList.toggle('blurred', isEnlarged);
+        overlay.style.display = isEnlarged ? 'block' : 'none';
+
+        if (isEnlarged) {
+          const rect = img.getBoundingClientRect();
+          popup.style.top = `${rect.top + window.scrollY - 60}px`;
+          popup.style.left = `${rect.left + rect.width / 2 - 100}px`;
+          popup.style.display = 'block';
+        } else {
+          popup.style.display = 'none';
+        }
+      });
+    });
+
+    overlay.addEventListener('click', () => {
+      document.querySelectorAll('.heart-gallery img.enlarged').forEach(img => img.classList.remove('enlarged'));
+      document.querySelectorAll('.popup-text').forEach(popup => popup.style.display = 'none');
+      overlay.style.display = 'none';
+      document.body.classList.remove('blurred');
+    });
+
+    // Falling hearts animation
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let hearts = [];
+    const heartChars = ['❤️', '💖', '💕', '💘', '💗'];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function createHeart() {
+      return {
+        x: Math.random() * canvas.width,
+        y: -20,
+        size: Math.random() * 20 + 10,
+        speed: Math.random() * 1 + 0.5,
+        opacity: Math.random() * 0.5 + 0.5,
+        drift: (Math.random() - 0.5) * 0.5,
+        char: heartChars[Math.floor(Math.random() * heartChars.length)]
+      };
+    }
+
+    function drawHeart(x, y, size, opacity, char) {
+      ctx.globalAlpha = opacity;
+      ctx.font = `${size}px Arial`;
+      ctx.fillText(char, x, y);
+      ctx.globalAlpha = 1;
+    }
+
+    function animateHearts() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hearts.forEach((heart, index) => {
+        heart.y += heart.speed;
+        heart.x += heart.drift;
+        drawHeart(heart.x, heart.y, heart.size, heart.opacity, heart.char);
+        if (heart.y > canvas.height + 30) {
+          hearts[index] = createHeart();
+        }
+      });
+      requestAnimationFrame(animateHearts);
+    }
+
+    for (let i = 0; i < 60; i++) {
+      hearts.push(createHeart());
+    }
+    animateHearts();
+  </script>
+</body>
+</html>
